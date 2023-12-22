@@ -2,7 +2,7 @@ import { jest } from '@jest/globals'
 
 import { retrieveOgProduct, createProducts, updateProducts } from './og-products-api'
 import * as OgProductsApi from './og-products-api'
-import { mockOgProductApiResponse, mockOgProduct } from '../../mocks/mocks'
+import { mockOgProductApiResponse, mockOgProduct } from '../mocks/mocks'
 
 process.env.OG_API_KEY = 'APIKEY'
 

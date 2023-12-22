@@ -90,7 +90,7 @@ function getInvalidPriceMessage(sku: string) {
   return `The product with SKU ${sku} does not have an embedded price configured for the given settings; therefore, it will not be created in ordergroove.`
 }
 
-function isProductOnStock(productAvailability?: ProductVariantAvailability) {
+export const isProductOnStock = (productAvailability?: ProductVariantAvailability): boolean => {
   let result = false;
 
   if (productAvailability === undefined) {

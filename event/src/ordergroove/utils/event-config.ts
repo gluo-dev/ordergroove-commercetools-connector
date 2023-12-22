@@ -3,5 +3,8 @@ export const NotificationType = {
 }
 
 export const EventType = {
-	ProductPublished: "ProductPublished"
+  ProductPublished: "ProductPublished",
+  InventoryEntryQuantitySet: "InventoryEntryQuantitySet",
+  InventoryEntryCreated: "InventoryEntryCreated",
+  InventoryEntryDeleted: "InventoryEntryDeleted"
 }

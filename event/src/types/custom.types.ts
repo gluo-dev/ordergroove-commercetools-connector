@@ -1,4 +1,4 @@
-import { CreatedBy, MessageDeliveryPayload, Order, ProductProjection, InventoryEntry } from '@commercetools/platform-sdk';
+import { CreatedBy, MessageDeliveryPayload, Order, ProductProjection, InventoryEntry, ChannelReference } from '@commercetools/platform-sdk';
 
 export interface CtEventPayload extends MessageDeliveryPayload {
   notificationType: 'Message';
@@ -10,8 +10,13 @@ export interface CtEventPayload extends MessageDeliveryPayload {
     typeId: 'product' | 'order' | 'inventory-entry';
     id: string;
   };
+  resourceUserProvidedIdentifiers?: {
+    key?: string;
+    sku?: string;
+  }
   resourceVersion: number;
   type: 'ProductPublished' | 'OrderCreated' | 'InventoryEntryQuantitySet' | 'InventoryEntryDeleted' | 'InventoryEntryCreated';
+  sku?: string;
   order?: Order;
   productProjection?: ProductProjection;
   inventoryEntry?: InventoryEntry;
@@ -19,6 +24,7 @@ export interface CtEventPayload extends MessageDeliveryPayload {
   lastModifiedAt: string;
   createdBy: CreatedBy;
   lastModifiedBy: CreatedBy;
+  supplyChannel?: ChannelReference;
 }
 
 export interface OrdergrooveProduct {

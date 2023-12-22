@@ -19,7 +19,7 @@ export const retrieveOgProduct = async (product_id: string, executionId: string)
     status: 0
   };
 
-  logger.info(`Starting the process[${executionId}] of retrieving the product ${product_id}`);
+  logger.info(`[${executionId}] Starting the process of retrieving the product ${product_id} from ordergroove.`);
 
   try {
     await fetch(`${retrieveUrl}/${product_id}/`, {
@@ -49,10 +49,10 @@ export const retrieveOgProduct = async (product_id: string, executionId: string)
         result.product = ogProduct
       })
       .catch((error) => {
-        logger.error(`Error ocurred during the process[${executionId}] of retrieving the product ${product_id} from ordergroove.`, error);
+        logger.error(`[${executionId}] Error ocurred during the process of retrieving the product ${product_id} from ordergroove.`, error);
       });
   } catch (error) {
-    logger.error(`Error ocurred during the process[${executionId}] of retrieving the product ${product_id} from ordergroove.`, error);
+    logger.error(`[${executionId}] Error ocurred during the process of retrieving the product ${product_id} from ordergroove.`, error);
   }
 
   return result;
@@ -64,7 +64,7 @@ export const createProducts = async (products: Array<OrdergrooveProduct>, execut
     status: 0
   };
 
-  logger.info(`Starting the process[${executionId}] of creating products: ${JSON.stringify(products)}`);
+  logger.info(`[${executionId}] Starting the process of creating products in ordergroove: ${JSON.stringify(products)}`);
 
   try {
     await fetch(productsBatchCreateUrl, {
@@ -84,13 +84,13 @@ export const createProducts = async (products: Array<OrdergrooveProduct>, execut
         throw new Error(`Status ${response.status}`);
       })
       .then((data) => {
-        logger.info(`Response during the process[${executionId}] of creating products in ordergroove: ${JSON.stringify(data)}`);
+        logger.info(`[${executionId}] Response during the process of creating products in ordergroove: ${JSON.stringify(data)}`);
       })
       .catch((error) => {
-        logger.error(`Error ocurred during the process[${executionId}] of creating products in ordergroove.`, error);
+        logger.error(`[${executionId}] Error ocurred during the process of creating products in ordergroove.`, error);
       });
   } catch (error) {
-    logger.error(`Error ocurred during the process[${executionId}] of creating products in ordergroove.`, error);
+    logger.error(`[${executionId}] Error ocurred during the process of creating products in ordergroove.`, error);
   }
 
   return result;
@@ -102,7 +102,7 @@ export const updateProducts = async (products: Array<OrdergrooveProduct>, execut
     status: 0
   };
 
-  logger.info(`Starting the process[${executionId}] of updating products: ${JSON.stringify(products)}`);
+  logger.info(`[${executionId}] Starting the process of updating products in ordergroove: ${JSON.stringify(products)}`);
 
   try {
     await fetch(productsBatchUpdateUrl, {
@@ -122,13 +122,13 @@ export const updateProducts = async (products: Array<OrdergrooveProduct>, execut
         throw new Error(`Status ${response.status}`);
       })
       .then((data) => {
-        logger.info(`Response during the process[${executionId}] of updating products in ordergroove: ${JSON.stringify(data)}`);
+        logger.info(`[${executionId}] Response during the process of updating products in ordergroove: ${JSON.stringify(data)}`);
       })
       .catch((error) => {
-        logger.error(`Error ocurred during the process[${executionId}] of updating products in ordergroove.`, error);
+        logger.error(`[${executionId}] Error ocurred during the process of updating products in ordergroove.`, error);
       });
   } catch (error) {
-    logger.error(`Error ocurred during the process[${executionId}] of updating products in ordergroove.`, error);
+    logger.error(`[${executionId}] Error ocurred during the process of updating products in ordergroove.`, error);
   }
 
   return result;

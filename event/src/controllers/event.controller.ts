@@ -3,8 +3,9 @@ import { Request, Response } from 'express';
 import CustomError from '../errors/custom.error';
 import { logger } from '../utils/logger.utils';
 import { CtEventPayload } from '../types/custom.types';
-import { processProductPublishedEvent } from '../ordergroove/product-published-processor';
 import { EventType } from '../ordergroove/utils/event-config';
+import { processProductPublishedEvent } from '../ordergroove/product-published-processor';
+import { processInventoryEntryEvent } from '../ordergroove/inventory-processor';
 
 /**
  * Exposed event POST endpoint.
@@ -28,16 +29,20 @@ export const post = async (request: Request, response: Response) => {
       throw new CustomError(400, 'Bad request: Wrong No Pub/Sub message format');
     }
 
-    logger.info('Event message.data encoded:', request.body.message.data);
+    logger.info('Event message.data encoded:' + JSON.stringify(request.body.message.data));
 
     const payload: CtEventPayload = JSON.parse(
-      Buffer.from(request.body.message.data, 'base64').toString()
+      Buffer.from(request.body.message.data, 'base64').toString('utf8').trim()
     );
 
-    logger.info('Event message.data decoded:', payload);
+    logger.info('Event message.data decoded:' + JSON.stringify(payload));
 
     if (payload.type === EventType.ProductPublished) {
       await processProductPublishedEvent(payload);
+    } else if (payload.type === EventType.InventoryEntryCreated ||
+        payload.type === EventType.InventoryEntryQuantitySet ||
+        payload.type === EventType.InventoryEntryDeleted) {
+      await processInventoryEntryEvent(payload);
     }
 
     // Return the response for the client

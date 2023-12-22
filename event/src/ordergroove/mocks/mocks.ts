@@ -1,6 +1,6 @@
-import { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk'
+import { ProductProjectionPagedQueryResponse, ProductVariant } from '@commercetools/platform-sdk'
 
-import { OrdergrooveProduct, OrdergrooveApiResponse, CtEventPayload } from '../types/custom.types';
+import { OrdergrooveProduct, OrdergrooveApiResponse, CtEventPayload } from '../../types/custom.types';
 
 export const mockOgProduct: OrdergrooveProduct = {
   product_id: 'ABC123',
@@ -198,4 +198,94 @@ export const mockProductCtEventPayload: CtEventPayload = {
   lastModifiedAt: '2023-11-29T21:51:17.902Z',
   createdBy: { "clientId": "1q1q1q1q1q" },
   lastModifiedBy: { "clientId": "1q1q1q1q1q" }
+}
+
+export const mockInventoryEntryDeletedEventPayload: CtEventPayload = {
+  createdAt: "2023-12-20T00:59:57.569Z",
+  id: "12345-ABCDE",
+  lastModifiedAt: "2023-12-20T00:59:57.569Z",
+  notificationType: "Message",
+  projectKey: "project-key",
+  resource: {
+    "id": "11111",
+    "typeId": "inventory-entry"
+  },
+  resourceUserProvidedIdentifiers: {
+    "sku": "WFJM"
+  },
+  resourceVersion: 2,
+  sequenceNumber: 2,
+  sku: "WFJM",
+  supplyChannel: {
+    "id": "11111",
+    "typeId": "channel"
+  },
+  type: "InventoryEntryDeleted",
+  version: 1,
+  createdBy: { "clientId": "1q1q1q1q1q" },
+  lastModifiedBy: { "clientId": "1q1q1q1q1q" }
+}
+
+export const mockProductVariantWithStock: ProductVariant = {
+  "id": 1,
+  "sku": "WFJM",
+  "prices": [
+    {
+      "id": "12345",
+      "value": {
+        "type": "centPrecision",
+        "currencyCode": "USD",
+        "centAmount": 399,
+        "fractionDigits": 2
+      },
+      "country": "US"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://image.com",
+      "dimensions": {
+        "w": 5056,
+        "h": 4784
+      }
+    }
+  ],
+  "attributes": [],
+  "assets": [],
+  "availability": {
+    "isOnStock": true,
+    "availableQuantity": 100
+  }
+}
+
+export const mockProductVariantOutOfStock: ProductVariant = {
+  "id": 1,
+  "sku": "WFJM",
+  "prices": [
+    {
+      "id": "12345",
+      "value": {
+        "type": "centPrecision",
+        "currencyCode": "USD",
+        "centAmount": 399,
+        "fractionDigits": 2
+      },
+      "country": "US"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://image.com",
+      "dimensions": {
+        "w": 5056,
+        "h": 4784
+      }
+    }
+  ],
+  "attributes": [],
+  "assets": [],
+  "availability": {
+    "isOnStock": false,
+    "availableQuantity": 0
+  }
 }

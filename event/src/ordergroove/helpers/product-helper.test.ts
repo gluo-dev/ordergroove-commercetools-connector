@@ -1,7 +1,7 @@
-//import { jest } from '@jest/globals'
+import { jest } from '@jest/globals'
 
 import { extractProductVariants } from './product-helper'
-import { mockProductCtEventPayload } from '../../mocks/mocks'
+import { mockProductCtEventPayload } from '../mocks/mocks'
 
 jest.mock('../utils/data-utils')
 jest.mock('./product-helper', () => {

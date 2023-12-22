@@ -32,6 +32,8 @@ export const processProductPublishedEvent = async (payload : CtEventPayload) : P
           if (!ogUpdateResponse.success && (ogUpdateResponse.status === 500)) {
             await updateProducts(updProducts, execution_id);
           }
+        } else {
+          logger.info(`[${execution_id}] The product published with sku ${ctProduct.sku} does not need an update in ordergroove.`);
         }
       }
     }
